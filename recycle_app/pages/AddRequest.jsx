@@ -1,7 +1,9 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native';
 import LOGO from '../assets/Logo.png';
 import Button from '../static/Button';
+
+const { width, height } = Dimensions.get('window');
 
 const AddRequest = ({ navigation }) => {
     return (
@@ -21,23 +23,25 @@ const AddRequest = ({ navigation }) => {
     );
 };
 
-
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: "center",
-
-
+        paddingHorizontal: '2%', // Responsive padding
     },
     imageBox: {
         alignItems: 'center',
-        margin: 100,
+        marginBottom: height * 0.05, // Margin relative to screen height
     },
     logoImage: {
-        width: 200,
-        height: 200,
-    }
+        width: width * 0.5, // Responsive width (50% of screen width)
+        height: height * 0.25, // Responsive height (25% of screen height)
+    },
+    buttonContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: height * 0.02, // Space between the image and buttons
+    },
 });
 
 export default AddRequest;

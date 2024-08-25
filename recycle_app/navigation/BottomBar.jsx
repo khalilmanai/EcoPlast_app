@@ -1,25 +1,25 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "react-native-vector-icons";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Dimensions } from "react-native";
 import Home from "../pages/Home";
 import Gifts from "../pages/Gifts";
 import AddRequest from "../pages/AddRequest";
 import HeaderComponent from "../components/HeaderComponent";
 import { green } from "../static/colors";
 
+const { width, height } = Dimensions.get('window');
+
 const BottomTabs = () => {
     const loggedUser = "Robert";
     const Tab = createBottomTabNavigator();
 
     const tabBarOptions = {
-
         tabBarActiveTintColor: "#1A9435",
         tabBarStyle: {
-            height: 80,
-            borderTopEndRadius: 20,
-            borderTopLeftRadius: 20,
-
+            height: height * 0.1, // Responsive height for the tab bar
+            borderTopEndRadius: width * 0.05,
+            borderTopLeftRadius: width * 0.05,
         },
         tabBarLabelStyle: {
             display: "none",
@@ -28,14 +28,18 @@ const BottomTabs = () => {
 
     const screenOptions = (iconName, color) => ({
         tabBarIcon: ({ focused }) => (
-            <Ionicons name={focused ? iconName : `${iconName}-outline`} size={32} color={color} />
+            <Ionicons
+                name={focused ? iconName : `${iconName}-outline`}
+                size={width * 0.08} // Responsive icon size
+                color={color}
+            />
         ),
     });
 
     const addScreenOptions = {
         tabBarIcon: ({ size }) => (
             <View style={styles.Tab}>
-                <Ionicons name="add" size={size + 10} color="white" />
+                <Ionicons name="add" size={size * 1.4} color="white" />
             </View>
         ),
         headerTitle: "",
@@ -71,13 +75,13 @@ const BottomTabs = () => {
 
 const styles = StyleSheet.create({
     Tab: {
-        width: 60,
-        height: 60,
-        borderRadius: 30,
+        width: width * 0.15, // Responsive width for the add button
+        height: width * 0.15, // Responsive height for the add button
+        borderRadius: (width * 0.15) / 2, // Ensures circular shape
         backgroundColor: green,
         justifyContent: "center",
         alignItems: "center",
-        top: -30,
+        top: -height * 0.04, // Adjusted positioning for better alignment
     },
 });
 

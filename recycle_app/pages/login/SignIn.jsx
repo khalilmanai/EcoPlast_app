@@ -8,33 +8,32 @@ import { Ionicons } from '@expo/vector-icons';
 
 const { width, height } = Dimensions.get('window');
 
-const SignUp = () => {
+const SignIn = () => {
     const [isPasswordVisible, setPasswordVisible] = useState(false);
+    const [isMatchingPasswordVisible, setMatchingPasswordVisible] = useState(false)
     const navigation = useNavigation();
 
     return (
         <View style={styles.container}>
             <TouchableOpacity
                 onPress={() => {
-                    Alert.alert(
-                        'EcoPlast',
-                        "Voulez vous quittez l'application",
-                        [
-                            { text: 'Oui', onPress: () => { BackHandler.exitApp() } },
-                            { text: 'Non', onPress: () => { console.log("logout canceled") } }
-                        ],
-                        { cancelable: false }
-                    )
+
+                    navigation.goBack()
                 }}
                 style={{ backgroundColor: "white", borderRadius: 50, padding: 8, position: "absolute", left: 10, top: 10 }}>
-                <Ionicons name='close' size={32} color="black" />
+                <Ionicons name='chevron-back' size={32} color="black" />
             </TouchableOpacity>
 
             <View style={styles.flexBox}>
                 <View style={styles.textContainer}>
                     <Text style={styles.welcomeText}>Bienvenue,</Text>
-                    <Text style={styles.instructionText}>Veuillez ajouter les informations relatives a votre compte!</Text>
+                    <Text style={styles.instructionText}>Veuillez créer un nouveau compte!</Text>
                 </View>
+                <TextInput
+                    style={styles.input}
+                    placeholder='Nom complet'
+                    keyboardType='email-address'
+                />
                 <TextInput
                     style={styles.input}
                     placeholder='Email'
@@ -52,23 +51,27 @@ const SignUp = () => {
                         </Text>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.createAccountText}>
-                    <Text>Vous n'avez pas un compte ? </Text><TouchableOpacity
-                        onPress={() => {
-                            navigation.navigate('SignIn')
-                        }}
-                    >
-                        <Text style
-                            ={{ color: "blue" }}>Créer un compte</Text></TouchableOpacity>
+                <View style={styles.passwordInputContainer}>
+                    <TextInput
+                        style={styles.passwordInput}
+                        placeholder='Comfirmer mot de passe'
+                        secureTextEntry={!isMatchingPasswordVisible}
+                    />
+                    <TouchableOpacity onPress={() => setMatchingPasswordVisible(!isMatchingPasswordVisible)}>
+                        <Text style={styles.toggleText}>
+                            {isMatchingPasswordVisible ? 'Cacher' : 'Afficher'}
+                        </Text>
+                    </TouchableOpacity>
                 </View>
-                <Button text='Se connecter' />
+
+                <Button text='Créer Votre Compte' />
 
             </View>
         </View>
     );
 };
 
-export default SignUp;
+export default SignIn;
 
 const styles = StyleSheet.create({
     container: {

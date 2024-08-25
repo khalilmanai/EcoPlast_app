@@ -5,7 +5,6 @@ import Profile from '../pages/Profile';
 import BottomTabs from './BottomBar';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { TouchableOpacity } from 'react-native';
-import OnboardingPage from '../pages/OnboardingPage';
 import SignUp from '../pages/login/SignUp';
 import CodeAccess from '../pages/login/CodeAccess';
 import ListeRecyclables from '../pages/ListeRecyclables';
@@ -15,6 +14,7 @@ import { green } from '../static/colors';
 import Notifications from '../pages/Notifications';
 import MapComponent from '../components/MapComponent';
 import Confirmation from '../components/Confirmation';
+import SignIn from '../pages/login/SignIn';
 const StackNavigation = () => {
     const Stack = createNativeStackNavigator();
     const navigation = useNavigation();
@@ -22,8 +22,15 @@ const StackNavigation = () => {
     return (
         <Stack.Navigator
             screenOptions={{ headerShown: false }}
-            initialRouteName='onBoarding'
+            initialRouteName='SignUp'
         >
+
+            <Stack.Screen name="SignUp" component={SignUp}
+
+            />
+            <Stack.Screen name="SignIn" component={SignIn}
+
+            />
             <Stack.Screen name="TabBar" component={BottomTabs} />
             <Stack.Screen
                 name="Profile"
@@ -44,28 +51,7 @@ const StackNavigation = () => {
                     headerShown: true,
                 }}
             />
-            <Stack.Screen name="onBoarding" component={OnboardingPage} />
-            <Stack.Screen name="SignUp" component={SignUp}
-                options={{
-                    headerTitle: "connexion par téléphone",
-                    headerTitleAlign: "center",
-                    headerStyle: {
-                        backgroundColor: green,
-                    },
-                    headerTitleStyle: {
-                        color: "white"
-                    },
-                    headerLeft: () => (
-                        <TouchableOpacity
 
-                            onPress={() => navigation.goBack()}
-                        >
-                            <Ionicons name="chevron-back" size={24} color="white" />
-                        </TouchableOpacity>
-                    ),
-                    headerShown: true,
-                }}
-            />
             <Stack.Screen name="codeAccess" component={CodeAccess} />
             <Stack.Screen
                 options={{
