@@ -61,7 +61,7 @@ const SignUp = () => {
                         <Text style
                             ={{ color: "blue" }}>Créer un compte</Text></TouchableOpacity>
                 </View>
-                <Button text='Se connecter' />
+                <Button text='Se connecter' onPress={navigation.replace('TabBar')} />
 
             </View>
         </View>
